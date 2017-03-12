@@ -16,7 +16,7 @@
 	<h1>Train Scheduler</h1>
 </div>
 <container>
-	<div class = "row">
+	<div class = "row"> 
 		<div class = "col-lg-1"></div>
 			<div class="col-lg-10">
 	        	<div class="panel panel-primary">
@@ -59,27 +59,27 @@
           </div>
           <div class="panel-body">
 
-                <!-- Sign-up Form (note the various input "types")-->
+                <!-- Train information form -->
 
                     <form role="form">
                       <div class="form-group">
-                        <label for="name-input">Train Name</label>
+                        <label for="train-input">Train Name</label>
                         <input class="form-control" id="name-input" type="text">
                       </div>
                       <div class="form-group">
-                        <label for="email-input">Destination</label>
-                        <input class="form-control" id="role-input" type="email">
+                        <label for="destination-input">Destination</label>
+                        <input class="form-control" id="destination-input" type="text">
                       </div>
                       <div class="form-group">
-                        <label for="monthlysalary-input">First Train Time (Military time HH:MM)</label>
-                        <input class="form-control" id="salary-input" type="number">
+                        <label for="first-train-input">First Train Time (Military time HH:MM)</label>
+                        <input class="form-control" id="first-train" type="text">
                       </div>
                       <div class="form-group">
-                        <label for="startdate-input">Frequency (In Minutes)</label>
-                        <input class="form-control" id="salary-input" type="number">
+                        <label for="frequency-input">Frequency (In Minutes)</label>
+                        <input class="form-control" id="freq" type="text">
 
                       </div>
-                      <button class="btn btn-primary" id="add-employee" type="submit">Submit</button>
+                      <button class="btn btn-primary" id="add-train" type="submit">Submit</button>
 
 
                     </form>
@@ -89,15 +89,12 @@
 </div>
 <div class = "col-lg-1"></div>
 </container>
+<!-- moment.js library -->
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
 
-
-
-
-	
-
-
-
-	
+<!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  -->
+<!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  -->
+								<!--firebase  code-->
 <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
 <script>
   // Initialize Firebase
@@ -110,6 +107,31 @@
   };
   firebase.initializeApp(config);
 
+  var database = firebase.database();
+
+  var train = "";
+  var destination = "";
+  var frequency = 0;
+  var firstTrainTime = 00:00;
+
+
+  $("#add-train").on("click", function(event)) {
+  	event.preventDefault();
+  	
+  	train = $("#train-input").val().trim();
+  	destination = $("#destination-input").val().trim();
+  	frequency = $("#frequency-input").val().trim();
+  	firstTrainTime = $("#first-train-input").val().trim();
+
+  	database.ref().push({
+  		train: train,
+  		destination: destination,
+  		frequency: frequency,
+  		firstTrainTime: firstTrainTime
+
+  	});
+
+  }
 
 
 </script>
